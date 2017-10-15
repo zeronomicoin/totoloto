@@ -6,7 +6,7 @@ touch loto
 
 Suspense () {	
 # si identique à une déjà sortie, on recommence
-	grep -q $res $1 && continue
+	grep -q $res $1 && continue 2>/dev/null    # redirection semble nécessaire avec bash 4.4
 	echo $res >> $1
 }
 

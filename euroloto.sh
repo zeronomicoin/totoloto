@@ -5,7 +5,7 @@ touch toto loto
 
 Suspense () {	
 # si identique à une déjà sortie, on recommence
-	grep -q $res $1 && continue 2>/dev/null    # redirection seems to be necessary with bash 4.4
+	grep -q $res $1 && return 1    # Thank you Niels !!! 
 	echo $res >> $1
 }
 
@@ -23,7 +23,7 @@ do
 		[[ $res -le 50 && $res -ge 1 ]] && break
 		((int++))
 	done
-	Suspense toto
+	Suspense toto || continue      # It does really make sense  
 	echo -e " Boule $chance :\t$res"
 	sleep 1
 	((chance++))
@@ -42,7 +42,7 @@ do
 # aujourd'hui $res -le 12
 		((int++))	
 	done
-	Suspense loto
+	Suspense loto || continue
 	echo "Complémentaire : $res"
 	sleep 1
 	((cpl++))
